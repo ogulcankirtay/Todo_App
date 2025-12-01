@@ -7,8 +7,9 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class Repository
 @Inject constructor(
-    private val localDataSource: LocalDataSource
+     localDataSource: LocalDataSource
 ) {
 
+     val localDataSource=localDataSource
 
 }
