@@ -1,4 +1,4 @@
-package com.oglcnkrty.todo_app.ui.home
+package com.oglcnkrty.todo_app.ui.home.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

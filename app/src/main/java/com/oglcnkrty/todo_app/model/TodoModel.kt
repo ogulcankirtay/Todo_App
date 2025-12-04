@@ -11,7 +11,14 @@ data class TodoModel(
         val title : String?,
         val description : String?,
         val priority :Priority,
-        val date : String?,
-        val isDone : Boolean?
-        )
+        var isDone : Boolean?
+        ){
+
+        fun areContentsTheSame(newModel: TodoModel): Boolean{
+
+                return this.isDone==newModel.isDone && this.title==newModel.title
+                        && this.description==newModel.description && this.priority==newModel.priority
+
+        }
+}
 
