@@ -7,11 +7,11 @@ import com.oglcnkrty.todo_app.enums.Priority;
 
 @Entity(tableName = "todos")
 data class TodoModel(
-        @PrimaryKey(autoGenerate = true)  val id : Int=0,
-        val title : String?,
-        val description : String?,
-        val priority :Priority,
-        var isDone : Boolean?
+    @PrimaryKey(autoGenerate = true) var id : Int=0,
+    val title : String?,
+    val description : String?,
+    val priority :Priority,
+    var isDone : Boolean?
         ){
 
         fun areContentsTheSame(newModel: TodoModel): Boolean{

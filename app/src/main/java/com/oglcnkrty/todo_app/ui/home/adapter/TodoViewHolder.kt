@@ -14,13 +14,7 @@ class TodoViewHolder(private val binding: ItemTodoBinding): RecyclerView.ViewHol
         binding.toDoModel=todoModel
         binding.executePendingBindings()
 
-        binding.root.setOnClickListener {
-            clickListener.onTodoItemClickListener(todoModel.id)
-        }
-        binding.cbTodo.setOnCheckedChangeListener { _, isChecked ->
-            todoModel.isDone=isChecked
-            clickListener.onTodoChecked(todoModel)
-        }
+     binding.todoClickListener=clickListener
     }
 
     companion object{

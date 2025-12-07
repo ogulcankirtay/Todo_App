@@ -3,24 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+   >
     <data>
         <variable
-            name="ClickListener"
+            name="clickListener"
             type="com.oglcnkrty.todo_app.base.listener.TodoItemClickListener" />
     <variable
-        name="ViewModel"
+        name="viewModel"
         type="com.oglcnkrty.todo_app.ui.home.viewmodel.HomeViewModel" />
     </data>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_todos"
-        app:todoList="@{ViewModel.todoList}"
-        app:setOnClickListener="@{ClickListener}"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize"
+        tools:context=".ui.home.HomeFragment"
+       >
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_todos"
+        app:todoList="@{viewModel.todoList}"
+        app:setOnClickListener="@{clickListener}"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="26dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +42,6 @@
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

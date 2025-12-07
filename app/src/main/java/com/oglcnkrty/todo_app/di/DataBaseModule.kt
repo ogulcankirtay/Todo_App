@@ -20,7 +20,7 @@
         @Provides
         fun provideTodoDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
             context, ToddDatabase::class.java, DATABASE_NAME
-        ).build()
+        ).fallbackToDestructiveMigration().build()
 
         @Singleton
         @Provides

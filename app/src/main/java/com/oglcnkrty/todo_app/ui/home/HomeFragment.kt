@@ -1,23 +1,19 @@
 package com.oglcnkrty.todo_app.ui.home
 
 import android.os.Bundle
-import android.text.format.DateUtils
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.application
-import com.oglcnkrty.todo_app.R
+import androidx.navigation.fragment.findNavController
 import com.oglcnkrty.todo_app.base.listener.TodoItemClickListener
 import com.oglcnkrty.todo_app.databinding.FragmentHomeBinding
-import com.oglcnkrty.todo_app.enums.Priority
 import com.oglcnkrty.todo_app.model.TodoModel
 import com.oglcnkrty.todo_app.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.Console
-import java.util.Date
+
 @AndroidEntryPoint
 class HomeFragment : Fragment(), TodoItemClickListener {
 
@@ -49,12 +45,7 @@ private  var _binding : FragmentHomeBinding? = null
         }
 
         binding.fbAdd.setOnClickListener {
-            viewModel.insertTodo( TodoModel(
-                title = "title",
-                description = "description",
-                priority = Priority.HIGH,
-                isDone = true
-            ))
+          findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewAndEditFragment())
         }
 
 
@@ -68,11 +59,12 @@ private  var _binding : FragmentHomeBinding? = null
     }
 
     override fun onTodoItemClickListener(id: Int) {
-        TODO("Not yet implemented")
+       val action = HomeFragmentDirections.actionHomeFragmentToNewAndEditFragment(id)
+        findNavController().navigate(action)
     }
 
     override fun onTodoChecked(todoModel: TodoModel) {
-        TODO("Not yet implemented")
+        viewModel.updateTodo(todoModel)
     }
 
 }

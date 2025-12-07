@@ -19,9 +19,9 @@ fun setPriority(view: ImageView, priority: Priority?) {
     val context = view.context
 
     val color = when (priority) {
-        Priority.HIGH -> context.getColor(R.color.holo_red_dark)
-        Priority.MEDIUM -> context.getColor(R.color.holo_orange_dark)
-        else -> context.getColor(R.color.holo_green_dark)
+        Priority.HIGH ->  android.R.color.holo_red_dark
+        Priority.MEDIUM -> android.R.color.holo_orange_dark
+        else -> android.R.color.holo_green_dark
     }
 
     ImageViewCompat.setImageTintList(view,

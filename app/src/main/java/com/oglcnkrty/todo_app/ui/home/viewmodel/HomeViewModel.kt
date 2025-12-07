@@ -18,12 +18,12 @@ class HomeViewModel @Inject constructor(
 
     val todoList = repository.localDataSource.getTodos().asLiveData()
 
-    fun insertTodo(todoModel: TodoModel) {
+    fun updateTodo(todoModel: TodoModel) {
+        val updatedTodo = todoModel.copy(isDone = todoModel.isDone?.not())
         viewModelScope.launch {
-            repository.localDataSource.insertTodo(
-                todoModel
-            )
+            repository.localDataSource.updateTodo(updatedTodo)
         }
-
     }
+
+
 }
