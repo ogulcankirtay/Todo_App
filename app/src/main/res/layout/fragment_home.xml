@@ -24,6 +24,8 @@
         app:setOnClickListener="@{clickListener}"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
+        app:searchQuery="@{viewModel.searchQuery}"
+        app:searchTodoList="@{viewModel.searchTodoList}"
         android:layout_height="match_parent"
         android:layout_marginTop="26dp"
         app:layout_constraintBottom_toBottomOf="parent"

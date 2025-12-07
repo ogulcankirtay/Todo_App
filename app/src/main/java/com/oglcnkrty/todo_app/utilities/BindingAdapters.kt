@@ -1,7 +1,6 @@
 package com.oglcnkrty.todo_app.utilities
 
 
-import android.R
 import android.content.res.ColorStateList
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
@@ -19,24 +18,46 @@ fun setPriority(view: ImageView, priority: Priority?) {
     val context = view.context
 
     val color = when (priority) {
-        Priority.HIGH ->  android.R.color.holo_red_dark
+        Priority.HIGH -> android.R.color.holo_red_dark
         Priority.MEDIUM -> android.R.color.holo_orange_dark
         else -> android.R.color.holo_green_dark
     }
 
-    ImageViewCompat.setImageTintList(view,
-        ColorStateList.valueOf(ContextCompat.getColor(context,color)))
+    ImageViewCompat.setImageTintList(
+        view,
+        ColorStateList.valueOf(ContextCompat.getColor(context, color))
+    )
 }
 
-@BindingAdapter("todoList","setOnClickListener")
-fun setAdapter(recyclerView: RecyclerView, todoList: List<TodoModel>?, clickListener: TodoItemClickListener){
+@BindingAdapter("todoList", "setOnClickListener", "searchQuery", "searchTodoList")
+fun setAdapter(
+    recyclerView: RecyclerView,
+    todoList: List<TodoModel>?,
+    clickListener: TodoItemClickListener,
+    searchQuery: String,
+    searchTodoList: List<TodoModel>?
+) {
 
     recyclerView.apply {
-        if(this.adapter==null){
-            adapter= TodoAdapter(clickListener).apply { submitList(todoList) }
+        if (this.adapter == null) {
+            adapter = TodoAdapter(clickListener).apply {
+                submitList(
+                    if (searchQuery.isEmpty()) {
+                        todoList
+                    } else {
+                        searchTodoList
+                    }
+                )
+            }
 
-        }else{
-            (adapter as TodoAdapter).submitList(todoList)
+        } else {
+            (adapter as TodoAdapter).submitList(
+                if (searchQuery.isEmpty()) {
+                    todoList
+                } else {
+                    searchTodoList
+                }
+            )
         }
 
     }

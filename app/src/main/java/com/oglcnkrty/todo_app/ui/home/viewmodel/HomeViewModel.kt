@@ -2,6 +2,8 @@ package com.oglcnkrty.todo_app.ui.home.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.oglcnkrty.todo_app.data.Repository
@@ -17,11 +19,21 @@ class HomeViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     val todoList = repository.localDataSource.getTodos().asLiveData()
+    var searchQuery = MutableLiveData("")
+    var searchTodoList: LiveData<List<TodoModel>> = MutableLiveData()
+
 
     fun updateTodo(todoModel: TodoModel) {
         val updatedTodo = todoModel.copy(isDone = todoModel.isDone?.not())
         viewModelScope.launch {
             repository.localDataSource.updateTodo(updatedTodo)
+        }
+    }
+
+    fun searchTodo(searchQuery: String) {
+        viewModelScope.launch {
+            searchTodoList = repository.localDataSource.searchTodo("%${searchQuery}%").asLiveData()
+            this@HomeViewModel.searchQuery.value=searchQuery
         }
     }
 
